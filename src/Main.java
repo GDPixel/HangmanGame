@@ -1,11 +1,10 @@
-import java.io.FileNotFoundException;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) {
         List<String> words;
         final String fileName = "resources//words.txt";
-        WordFileReader fileReader = new WordFileReader();
+        TextFileReader fileReader = new TextFileReader();
         words = fileReader.readWords(fileName);
 
         HangManGame game = new HangManGame(words);
