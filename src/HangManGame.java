@@ -14,20 +14,24 @@ public class HangManGame {
     public void run() {
         Scanner scanner = new Scanner(System.in);
         String guessWord = wordSelector.selectWord();
-        System.out.println("The word is guessed");
+        PuzzleWord puzzleWord = new PuzzleWord(guessWord);
+        System.out.println("Log: The word is guessed");
         System.out.println(guessWord);
         int stage = 0;
         while(stage < 6) {
+            System.out.println("Word to guess is: " + puzzleWord.getMaskedWord());
             System.out.println("Enter your guess: ");
             char letter = scanner.next().charAt(0);
             while (userLettersInput.hasLetter(letter)) {
+                System.out.println("You have already entered this letter.");
+                System.out.println("Enter your guess again: ");
                 letter = scanner.next().charAt(0);
             }
             userLettersInput.addLetter(letter);
+            puzzleWord.putLetter(letter);
             stage++;
         }
 
         System.out.println(userLettersInput.getLetters());
     }
-
 }
