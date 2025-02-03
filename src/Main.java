@@ -12,6 +12,14 @@ public class Main {
     }
 }
 
+// TODO: add check win or lose
+//  add checking user input
+//      make userSelectedInput for menu
+//      check user input for english letters
+//  add platform independent file reader
+//  add class asciipictures
+//  add README.md GITHUB
+
 // ТЗ Виселица
 //
 // 1. При старте, приложение предлагает начать новую игру или выйти из приложения

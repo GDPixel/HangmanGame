@@ -1,6 +1,8 @@
 import java.util.HashSet;
 import java.util.Set;
 
+//TODO: save and use only lowercase letters
+
 public class UserLettersInput {
     private final Set<Character> letters = new HashSet<Character>();
 
