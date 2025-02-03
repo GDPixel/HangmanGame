@@ -1,7 +1,7 @@
 public class PuzzleWord {
     private static final String MASK = "_";
-    private String word;
-    private StringBuilder maskedWord;
+    private final String word;
+    private final StringBuilder maskedWord;
 
 
     public PuzzleWord(String word) {
