@@ -7,6 +7,9 @@ public class PuzzleWord {
 
 
     public PuzzleWord(String word) {
+        if (word == null) {
+            throw new IllegalArgumentException("PuzzleWord constructor argument can't be null");
+        }
         this.word = word;
         maskedWord = new StringBuilder(MASK.repeat(word.length()));
     }
@@ -19,11 +22,15 @@ public class PuzzleWord {
         return word.contains(String.valueOf(letter));
     }
 
-    public void putLetter(char letter) {
+    public void openLetter(char letter) {
         for (int i = 0; i < word.length(); i++) {
             if (word.charAt(i) == letter) {
                 maskedWord.setCharAt(i, letter);
             }
         }
+    }
+
+    public boolean isSolved(){
+        return word.equals(getMaskedWord());
     }
 }

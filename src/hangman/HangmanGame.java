@@ -9,12 +9,10 @@ public class HangmanGame {
     private static final int EXIT = 2;
 
     private final HangmanPictures hangmanPictures;
-    private final List<String> words;
     private final WordSelector wordSelector;
     private final Scanner scanner = new Scanner(System.in);
 
     public HangmanGame(List<String> words) {
-        this.words = words;
         wordSelector = new WordSelector(words);
         hangmanPictures = new HangmanPictures();
     }
@@ -29,8 +27,7 @@ public class HangmanGame {
         UserLettersInput userLettersInput = new UserLettersInput();
         System.out.println("Log: The guessed word is " + guessWord);
         int error = 0;
-        boolean isWin = false;
-        while (error != MAX_ERRORS) {
+        while (error != MAX_ERRORS && !puzzleWord.isSolved()) {
             hangmanPictures.print(error);
             System.out.println("Word to guess is: " + puzzleWord.getMaskedWord());
             System.out.println("Entered letters: " + userLettersInput.getLetters());
@@ -44,18 +41,13 @@ public class HangmanGame {
             }
             userLettersInput.addLetter(letter);
             if (puzzleWord.hasLetter(letter)) {
-                puzzleWord.putLetter(letter);
+                puzzleWord.openLetter(letter);
             } else {
                 error++;
             }
-
-            isWin = guessWord.equals(puzzleWord.getMaskedWord());
-            if (isWin) {
-                break;
-            }
         }
 
-        if (isWin) {
+        if (puzzleWord.isSolved()) {
             System.out.println("You win!");
             System.out.println("The guessed word is " + guessWord);
         } else {
