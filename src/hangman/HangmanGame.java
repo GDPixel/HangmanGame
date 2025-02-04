@@ -4,18 +4,20 @@ import java.util.List;
 import java.util.Scanner;
 
 public class HangmanGame {
-    private List<String> words;
+    private static final int MAX_ERRORS = 6;
+    private final HangmanPictures hangmanPictures;
+    private final List<String> words;
     private final WordSelector wordSelector;
     private final Scanner scanner = new Scanner(System.in);
 
     public HangmanGame(List<String> words) {
         this.words = words;
         wordSelector = new WordSelector(words);
+        hangmanPictures = new HangmanPictures();
     }
 
     public void start(){
         mainMenu();
-        run();
     }
 
     private void run() {
@@ -23,8 +25,10 @@ public class HangmanGame {
         PuzzleWord puzzleWord = new PuzzleWord(guessWord);
         UserLettersInput userLettersInput = new UserLettersInput();
         System.out.println("Log: The guessed word is " + guessWord);
-        int stage = 0;
-        while (stage < 6) {
+        int error = 0;
+        boolean isWin = false;
+        while (error != MAX_ERRORS) {
+            hangmanPictures.print(error);
             System.out.println("Word to guess is: " + puzzleWord.getMaskedWord());
             System.out.println("Entered letters: " + userLettersInput.getLetters());
             System.out.println("Enter your guess: ");
@@ -36,14 +40,32 @@ public class HangmanGame {
                 letter = scanner.next().charAt(0);
             }
             userLettersInput.addLetter(letter);
-            puzzleWord.putLetter(letter);
-            stage++;
+            if (puzzleWord.hasLetter(letter)) {
+                puzzleWord.putLetter(letter);
+            } else {
+                error++;
+            }
+
+            isWin = guessWord.equals(puzzleWord.getMaskedWord());
+            if (isWin) {
+                break;
+            }
         }
+
+        if (isWin) {
+            System.out.println("You win!");
+            System.out.println("The guessed word is " + guessWord);
+        } else {
+            System.out.println("You lost!");
+            hangmanPictures.print(MAX_ERRORS);
+        }
+
+        mainMenu();
     }
 
 
     private void mainMenu() {
-        System.out.println("Welcome to HangMan Game!");
+        System.out.println("Welcome to Hangman Game!");
         System.out.println("Start the game (1)");
         System.out.println("Exit the game (2)");
         System.out.print("Please enter your choice: ");

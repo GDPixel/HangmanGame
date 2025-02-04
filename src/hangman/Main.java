@@ -4,22 +4,18 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        List<String> words;
         final String fileName = "resources/words.txt";
         TextFileReader fileReader = new TextFileReader();
-        words = fileReader.readWords(fileName);
+        List<String> words = fileReader.readWords(fileName);
 
         HangmanGame game = new HangmanGame(words);
         game.start();
     }
 }
 
-// TODO: add check win or lose
-//  add checking user input
+// TODO:add checking user input
 //      make userSelectedInput for menu
 //      check user input for english letters
-//  add platform independent file reader
-//  add class asciipictures
 //  add README.md GITHUB
 
 // ТЗ Виселица
