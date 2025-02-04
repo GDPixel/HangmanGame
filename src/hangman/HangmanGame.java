@@ -5,6 +5,9 @@ import java.util.Scanner;
 
 public class HangmanGame {
     private static final int MAX_ERRORS = 6;
+    private static final int NEW_GAME = 1;
+    private static final int EXIT = 2;
+
     private final HangmanPictures hangmanPictures;
     private final List<String> words;
     private final WordSelector wordSelector;
@@ -16,7 +19,7 @@ public class HangmanGame {
         hangmanPictures = new HangmanPictures();
     }
 
-    public void start(){
+    public void start() {
         mainMenu();
     }
 
@@ -66,14 +69,14 @@ public class HangmanGame {
 
     private void mainMenu() {
         System.out.println("Welcome to Hangman Game!");
-        System.out.println("Start the game (1)");
-        System.out.println("Exit the game (2)");
+        System.out.printf("Start the game (%d)%n", NEW_GAME);
+        System.out.printf("Exit the game (%d)%n", EXIT);
         System.out.print("Please enter your choice: ");
         int choice = scanner.nextInt();
-        if (choice == 1) {
+        if (choice == NEW_GAME) {
             run();
         }
-        if (choice == 2) {
+        if (choice == EXIT) {
             System.exit(0);
         }
     }
