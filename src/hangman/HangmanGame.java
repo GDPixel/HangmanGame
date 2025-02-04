@@ -1,12 +1,14 @@
+package hangman;
+
 import java.util.List;
 import java.util.Scanner;
 
-public class HangManGame {
+public class HangmanGame {
     private List<String> words;
     private final WordSelector wordSelector;
     private final Scanner scanner = new Scanner(System.in);
 
-    public HangManGame(List<String> words) {
+    public HangmanGame(List<String> words) {
         this.words = words;
         wordSelector = new WordSelector(words);
     }

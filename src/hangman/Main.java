@@ -1,13 +1,15 @@
+package hangman;
+
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         List<String> words;
-        final String fileName = "resources//words.txt";
+        final String fileName = "resources/words.txt";
         TextFileReader fileReader = new TextFileReader();
         words = fileReader.readWords(fileName);
 
-        HangManGame game = new HangManGame(words);
+        HangmanGame game = new HangmanGame(words);
         game.start();
     }
 }

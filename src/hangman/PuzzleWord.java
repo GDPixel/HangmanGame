@@ -1,3 +1,5 @@
+package hangman;
+
 public class PuzzleWord {
     private static final String MASK = "_";
     private final String word;
