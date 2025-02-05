@@ -7,15 +7,17 @@ import java.util.List;
 import java.util.Set;
 
 public class HangmanGame {
-    private static final int MAX_ERRORS = 6;
+    private static final int MAX_HIT_POINTS = 6;
     private static final int NEW_GAME = 1;
     private static final int EXIT = 2;
-    public static final String START_GAME = "Start the game (%d)%n".formatted(NEW_GAME);
-    public static final String EXIT_GAME = "Exit the game (%d)%n".formatted(EXIT);
-    public static final String ENTER_YOUR_CHOICE = "Please enter your choice: ";
-    public static final String WELCOME = "Welcome to Hangman Game!";
-    public static final String WRONG_INPUT = "Wrong input";
+    private static final String START_GAME = "Start the game (%d)%n".formatted(NEW_GAME);
+    private static final String EXIT_GAME = "Exit the game (%d)%n".formatted(EXIT);
+    private static final String ENTER_YOUR_CHOICE = "Please enter your choice: ";
+    private static final String WELCOME = "Welcome to Hangman Game!";
+    private static final String WRONG_INPUT = "Wrong input. Enter " + NEW_GAME + " or " + EXIT;
+    private static final String WRONG_INPUT_LETTER = "Wrong input. Enter a letter";
 
+    private HangedMan hangedMan;
     private final HangmanPictures hangmanPictures;
     private final WordSelector wordSelector;
     private PuzzleWord puzzleWord;
@@ -31,21 +33,28 @@ public class HangmanGame {
     }
 
     private void newGame() {
-        String guessWord = wordSelector.selectRandomWord();
-        puzzleWord = new PuzzleWord(guessWord);
+        newGameInit();
+        run();
+        printGameResult();
+        mainMenu();
+    }
+
+    private void newGameInit() {
+        String selectedWord = wordSelector.selectRandomWord();
+        puzzleWord = new PuzzleWord(selectedWord);
         userLettersInput = new UserLettersInput();
         System.out.println("Log: The guessed word is " + puzzleWord.getWord());
-        run();
     }
 
     private void run() {
-        int error = 0;
-        while (error != MAX_ERRORS && !isWin()) {
-            hangmanPictures.print(error);
+        hangedMan = new HangedMan(MAX_HIT_POINTS);
+        while (isRunning()) {
+            hangmanPictures.print(MAX_HIT_POINTS - hangedMan.getHitPoints());
+            System.out.printf("You can make %d more mistake(s)%n", hangedMan.getHitPoints());
             String title = "Word to guess is: " + puzzleWord.getMaskedWord()
                     + "\nEntered letters: " + userLettersInput.getLetters()
                     + "\nEnter your guess: ";
-            EngLetterDialog dialog = new EngLetterDialog(title, WRONG_INPUT);
+            EngLetterDialog dialog = new EngLetterDialog(title, WRONG_INPUT_LETTER);
             char letter = dialog.input();
             while (userLettersInput.hasLetter(letter)) {
                 System.out.println("You have already entered this letter.");
@@ -55,11 +64,13 @@ public class HangmanGame {
             if (puzzleWord.hasLetter(letter)) {
                 puzzleWord.openLetter(letter);
             } else {
-                error++;
+                hangedMan.decreaseHitPoints();
             }
         }
-        printGameResult();
-        mainMenu();
+    }
+
+    private boolean isRunning() {
+        return hangedMan.isAlive() && !isWin();
     }
 
     private void printGameResult() {
@@ -68,9 +79,8 @@ public class HangmanGame {
         } else {
             System.out.println("You lose!");
             System.out.println("The guessed word was " + puzzleWord.getWord());
-            hangmanPictures.print(MAX_ERRORS);
+            hangmanPictures.print(MAX_HIT_POINTS);
         }
-
     }
 
     private void mainMenu() {
@@ -89,4 +99,5 @@ public class HangmanGame {
     private boolean isWin() {
         return puzzleWord.isSolved();
     }
+
 }
