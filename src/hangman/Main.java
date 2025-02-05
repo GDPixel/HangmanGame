@@ -13,10 +13,7 @@ public class Main {
     }
 }
 
-// TODO:add checking user input
-//      make userSelectedInput for menu
-//      check user input for english letters
-//  add README.md GITHUB
+// TODO: add README.md GITHUB
 
 // ТЗ Виселица
 //

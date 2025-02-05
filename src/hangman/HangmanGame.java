@@ -18,6 +18,8 @@ public class HangmanGame {
 
     private final HangmanPictures hangmanPictures;
     private final WordSelector wordSelector;
+    private PuzzleWord puzzleWord;
+    private UserLettersInput userLettersInput;
 
     public HangmanGame(List<String> words) {
         wordSelector = new WordSelector(words);
@@ -28,13 +30,17 @@ public class HangmanGame {
         mainMenu();
     }
 
+    private void newGame() {
+        String guessWord = wordSelector.selectRandomWord();
+        puzzleWord = new PuzzleWord(guessWord);
+        userLettersInput = new UserLettersInput();
+        System.out.println("Log: The guessed word is " + puzzleWord.getWord());
+        run();
+    }
+
     private void run() {
-        String guessWord = wordSelector.selectWord();
-        PuzzleWord puzzleWord = new PuzzleWord(guessWord);
-        UserLettersInput userLettersInput = new UserLettersInput();
-        System.out.println("Log: The guessed word is " + guessWord);
         int error = 0;
-        while (error != MAX_ERRORS && !puzzleWord.isSolved()) {
+        while (error != MAX_ERRORS && !isWin()) {
             hangmanPictures.print(error);
             String title = "Word to guess is: " + puzzleWord.getMaskedWord()
                     + "\nEntered letters: " + userLettersInput.getLetters()
@@ -52,18 +58,20 @@ public class HangmanGame {
                 error++;
             }
         }
-
-        if (puzzleWord.isSolved()) {
-            System.out.println("You win!");
-            System.out.println("The guessed word is " + guessWord);
-        } else {
-            System.out.println("You lost!");
-            hangmanPictures.print(MAX_ERRORS);
-        }
-
+        printGameResult();
         mainMenu();
     }
 
+    private void printGameResult() {
+        if (isWin()) {
+            System.out.println("Congratulation! You win!");
+        } else {
+            System.out.println("You lose!");
+            System.out.println("The guessed word was " + puzzleWord.getWord());
+            hangmanPictures.print(MAX_ERRORS);
+        }
+
+    }
 
     private void mainMenu() {
         System.out.println(WELCOME);
@@ -71,10 +79,14 @@ public class HangmanGame {
         IntegerSelectDialog dialog = new IntegerSelectDialog(title, WRONG_INPUT, Set.of(NEW_GAME, EXIT));
         int choice = dialog.input();
         if (choice == NEW_GAME) {
-            run();
+            newGame();
         }
         if (choice == EXIT) {
             System.exit(0);
         }
+    }
+
+    private boolean isWin() {
+        return puzzleWord.isSolved();
     }
 }

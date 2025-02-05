@@ -11,7 +11,7 @@ public class WordSelector {
         this.words = words;
     }
 
-    public String selectWord() {
+    public String selectRandomWord() {
         return words.get(rand.nextInt(words.size()));
     }
 }

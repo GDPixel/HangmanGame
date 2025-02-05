@@ -9,7 +9,7 @@ public class HangmanPictures {
                  |
                  |
                  |
-             =====
+            ======
             """,
             """
               +--+
@@ -18,7 +18,7 @@ public class HangmanPictures {
                  |
                  |
                  |
-             =====
+            ======
             """,
             """
               +--+
@@ -27,7 +27,7 @@ public class HangmanPictures {
               |  |
                  |
                  |
-             =====
+            ======
             """,
             """
               +--+
@@ -36,7 +36,7 @@ public class HangmanPictures {
              /|  |
                  |
                  |
-             =====
+            ======
             """,
             """
               +--+
@@ -45,7 +45,7 @@ public class HangmanPictures {
              /|\\ |
                  |
                  |
-             =====
+            ======
             """,
             """
               +--+
@@ -54,7 +54,7 @@ public class HangmanPictures {
              /|\\ |
              /   |
                  |
-             =====
+            ======
             """,
             """
               +--+
@@ -63,11 +63,11 @@ public class HangmanPictures {
              /|\\ |
              / \\ |
                  |
-             =====
+            ======
             """
     };
 
     public void print(int stage) {
-        System.out.println(pictures[stage]);
+        System.out.print(pictures[stage]);
     }
 }

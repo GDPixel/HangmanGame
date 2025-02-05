@@ -14,6 +14,10 @@ public class PuzzleWord {
         maskedWord = new StringBuilder(MASK.repeat(word.length()));
     }
 
+    public String getWord() {
+        return word;
+    }
+
     public String getMaskedWord() {
         return maskedWord.toString();
     }
