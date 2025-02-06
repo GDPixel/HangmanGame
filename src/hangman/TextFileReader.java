@@ -10,9 +10,6 @@ import java.util.Scanner;
 
 public class TextFileReader {
     public List<String> readWords(String fileName) {
-        // check if file exist
-        // add words to List
-        // check if word empty throw exception
         Path path = Paths.get(fileName);
         List<String> words = new ArrayList<>();
         try (Scanner scanner = new Scanner(Files.newBufferedReader(path))) {
@@ -22,10 +19,8 @@ public class TextFileReader {
 
         } catch (IOException e) {
             System.out.println("File not found " + path);
-            System.out.println(path.toAbsolutePath());
             System.exit(1);
         }
-        System.out.println(path.toAbsolutePath());
         return words;
     }
 }

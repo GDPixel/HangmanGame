@@ -1,6 +1,6 @@
 package hangman;
 
-import hangman.dialog.EngLetterDialog;
+import hangman.dialog.EnglishLetterDialog;
 import hangman.dialog.IntegerSelectDialog;
 
 import java.util.List;
@@ -54,7 +54,7 @@ public class HangmanGame {
             String title = "Word to guess is: " + puzzleWord.getMaskedWord()
                     + "\nEntered letters: " + userLettersInput.getLetters()
                     + "\nEnter your guess: ";
-            EngLetterDialog dialog = new EngLetterDialog(title, WRONG_INPUT_LETTER);
+            EnglishLetterDialog dialog = new EnglishLetterDialog(title, WRONG_INPUT_LETTER);
             char letter = dialog.input();
             while (userLettersInput.hasLetter(letter)) {
                 System.out.println("You have already entered this letter.");
@@ -85,6 +85,8 @@ public class HangmanGame {
 
     private void mainMenu() {
         System.out.println(WELCOME);
+        String border = "----------------------------";
+        System.out.println(border);
         String title = START_GAME + EXIT_GAME + ENTER_YOUR_CHOICE;
         IntegerSelectDialog dialog = new IntegerSelectDialog(title, WRONG_INPUT, Set.of(NEW_GAME, EXIT));
         int choice = dialog.input();
@@ -99,5 +101,4 @@ public class HangmanGame {
     private boolean isWin() {
         return puzzleWord.isSolved();
     }
-
 }

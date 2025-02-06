@@ -2,11 +2,11 @@ package hangman.dialog;
 
 import java.util.Scanner;
 
-public class EngLetterDialog implements Dialog<Character> {
+public class EnglishLetterDialog implements Dialog<Character> {
     private final String title;
     private final String error;
 
-    public EngLetterDialog(String title, String error) {
+    public EnglishLetterDialog(String title, String error) {
         this.title = title;
         this.error = error;
     }
