@@ -8,7 +8,7 @@ public class Main {
         TextFileReader fileReader = new TextFileReader();
         List<String> words = fileReader.readWords(fileName);
 
-        HangmanGame game = new HangmanGame(words);
+        HangmanGame game = new HangmanGame(words, GameDifficulty.MEDIUM);
         game.start();
     }
 }

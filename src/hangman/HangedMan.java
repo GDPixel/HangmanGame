@@ -1,24 +1,24 @@
 package hangman;
 
 public class HangedMan {
-    private int hitPoints;
+    private int health;
 
-    public HangedMan(int initialHitPoints) {
-        this.hitPoints = initialHitPoints;
+    public HangedMan(int health) {
+        this.health = health;
     }
 
-    public int getHitPoints() {
-        return hitPoints;
+    public int getHealth() {
+        return health;
     }
 
-    public void decreaseHitPoints() {
-        if (hitPoints > 0) {
-            hitPoints--;
+    public void decreaseHealth() {
+        if (health > 0) {
+            health--;
         }
     }
 
     public boolean isAlive() {
-        return hitPoints > 0;
+        return health > 0;
     }
 }
 

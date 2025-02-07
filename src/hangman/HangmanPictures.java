@@ -68,6 +68,9 @@ public class HangmanPictures {
     };
 
     public void print(int stage) {
+        if (stage < 0 || stage >= pictures.length) {
+            throw new IllegalArgumentException("Invalid stage number, it has to be between 0 and " + (pictures.length - 1));
+        }
         System.out.print(pictures[stage]);
     }
 }

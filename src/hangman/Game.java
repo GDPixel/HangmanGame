@@ -11,19 +11,20 @@ public class Game {
     private final HangmanPictures hangmanPictures;
     private final HangedMan hangedMan;
 
-    public Game(String selectedWord) {
+    public Game(String selectedWord, GameDifficulty gameDifficulty) {
         puzzleWord = new PuzzleWord(selectedWord);
-        hangedMan = new HangedMan(MAX_HIT_POINTS);
+        hangedMan = new HangedMan(gameDifficulty.getInitialHealth());
         hangmanPictures = new HangmanPictures();
         userLettersInput = new UserLettersInput();
+        // TODO remove log
         System.out.println("Log: The guessed word is " + puzzleWord.getWord());
+        puzzleWord.openRandomLetters(gameDifficulty.getNumberOfOpenLetters());
     }
 
     public void run() {
-
         while (isRunning()) {
-            hangmanPictures.print(MAX_HIT_POINTS - hangedMan.getHitPoints());
-            System.out.printf("You can make %d more mistake(s)%n", hangedMan.getHitPoints());
+            hangmanPictures.print(MAX_HIT_POINTS - hangedMan.getHealth());
+            System.out.printf("You can make %d more mistake(s)%n", hangedMan.getHealth());
             String title = "Word to guess is: " + puzzleWord.getMaskedWord()
                     + "\nEntered letters: " + userLettersInput.getLetters()
                     + "\nEnter your guess: ";
@@ -37,7 +38,7 @@ public class Game {
             if (puzzleWord.hasLetter(letter)) {
                 puzzleWord.openLetter(letter);
             } else {
-                hangedMan.decreaseHitPoints();
+                hangedMan.decreaseHealth();
             }
         }
         printGameResult();

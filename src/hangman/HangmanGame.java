@@ -15,9 +15,11 @@ public class HangmanGame {
     private static final String WRONG_INPUT = "Wrong input. Enter " + NEW_GAME + " or " + EXIT;
 
     private final WordSelector wordSelector;
+    private final GameDifficulty gameDifficulty;
 
-    public HangmanGame(List<String> words) {
+    public HangmanGame(List<String> words, GameDifficulty gameDifficulty) {
         wordSelector = new WordSelector(words);
+        this.gameDifficulty = gameDifficulty;
     }
 
     public void start() {
@@ -26,7 +28,7 @@ public class HangmanGame {
 
     private void newGame() {
         String selectedWord = wordSelector.selectRandomWord();
-        Game game = new Game(selectedWord);
+        Game game = new Game(selectedWord, gameDifficulty);
         game.run();
         mainMenu();
     }
@@ -35,6 +37,7 @@ public class HangmanGame {
         System.out.println(WELCOME);
         String border = "---------------------------";
         System.out.println(border);
+        System.out.println("Game difficulty: " + gameDifficulty);
         String title = START_GAME + EXIT_GAME + ENTER_YOUR_CHOICE;
         IntegerSelectDialog dialog = new IntegerSelectDialog(title, WRONG_INPUT, Set.of(NEW_GAME, EXIT));
         int choice = dialog.input();
@@ -42,7 +45,7 @@ public class HangmanGame {
             newGame();
         }
         if (choice == EXIT) {
-            System.exit(0);
+            System.out.println("Exiting game...");
         }
     }
 }
