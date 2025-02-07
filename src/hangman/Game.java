@@ -1,6 +1,8 @@
 package hangman;
 
 import hangman.dialog.EnglishLetterDialog;
+import hangman.puzzleword.PuzzleWord;
+import hangman.puzzleword.ScrambledPuzzleWord;
 
 public class Game {
     private static final int MAX_HEALTH = 6;
@@ -11,13 +13,17 @@ public class Game {
     private final HangmanPictures hangmanPictures;
     private final HangedMan hangedMan;
 
-    public Game(String selectedWord, GameDifficulty gameDifficulty) {
-        puzzleWord = new PuzzleWord(selectedWord);
+    public Game(PuzzleWord puzzleWord, GameDifficulty gameDifficulty) {
+        this.puzzleWord = puzzleWord;
         hangedMan = new HangedMan(gameDifficulty.getInitialHealth());
         hangmanPictures = new HangmanPictures();
         wrongLetters = new WrongLetters();
         // TODO remove log
         System.out.println("Log: The guessed word is " + puzzleWord.getWord());
+        if (puzzleWord instanceof ScrambledPuzzleWord scrambledPuzzleWord) {
+            System.out.println(scrambledPuzzleWord.getScrambledWord());
+        }
+
         for (int i = 0; i < gameDifficulty.getNumberOfOpenLetters(); i++) {
             puzzleWord.openRandomLetter();
         }
@@ -59,7 +65,7 @@ public class Game {
     }
 
     private boolean isLetterGuessed(char letter) {
-        return wrongLetters.hasLetter(letter) && puzzleWord.hasLetter(letter);
+        return wrongLetters.hasLetter(letter) || puzzleWord.hasMaskedWordLetter(letter);
     }
 
     private boolean isRunning() {
