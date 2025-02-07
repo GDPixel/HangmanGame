@@ -1,8 +1,6 @@
 package hangman;
 
-import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
 
 public class PuzzleWord {
     private static final String MASK = "_";
@@ -38,19 +36,20 @@ public class PuzzleWord {
         }
     }
 
-    public void openRandomLetters(int count) {
-        // TODO bug if count > word.length infinite cycle
-        Set<Character> uniqueLetters = new HashSet<>();
-        Random rand = new Random();
-        while (count > 0) {
-            int letterPosition = rand.nextInt(word.length());
-            char letter = word.charAt(letterPosition);
-            if (!uniqueLetters.contains(letter)) {
-                uniqueLetters.add(letter);
-                openLetter(letter);
-                count--;
-            }
+    public void openRandomLetter() {
+        if (isSolved()) {
+            return;
         }
+
+        Random random = new Random();
+        int position = random.nextInt(maskedWord.length());
+        char letter = maskedWord.charAt(position);
+        while (letter != MASK.charAt(0)) {
+            position = random.nextInt(maskedWord.length());
+            letter = maskedWord.charAt(position);
+        }
+
+        openLetter(word.charAt(position));
     }
 
     public boolean isSolved() {

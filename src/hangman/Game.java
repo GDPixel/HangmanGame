@@ -3,7 +3,7 @@ package hangman;
 import hangman.dialog.EnglishLetterDialog;
 
 public class Game {
-    private static final int MAX_HIT_POINTS = 6;
+    private static final int MAX_HEALTH = 6;
     private static final String WRONG_INPUT_LETTER = "Wrong input. Enter a letter";
 
     private final PuzzleWord puzzleWord;
@@ -18,12 +18,14 @@ public class Game {
         userLettersInput = new UserLettersInput();
         // TODO remove log
         System.out.println("Log: The guessed word is " + puzzleWord.getWord());
-        puzzleWord.openRandomLetters(gameDifficulty.getNumberOfOpenLetters());
+        for (int i = 0; i < gameDifficulty.getNumberOfOpenLetters(); i++) {
+            puzzleWord.openRandomLetter();
+        }
     }
 
     public void run() {
         while (isRunning()) {
-            hangmanPictures.print(MAX_HIT_POINTS - hangedMan.getHealth());
+            hangmanPictures.print(MAX_HEALTH - hangedMan.getHealth());
             System.out.printf("You can make %d more mistake(s)%n", hangedMan.getHealth());
             String title = "Word to guess is: " + puzzleWord.getMaskedWord()
                     + "\nEntered letters: " + userLettersInput.getLetters()
@@ -50,7 +52,7 @@ public class Game {
         } else if (isLose()) {
             System.out.println("You lost!");
             System.out.println("The guessed word was " + puzzleWord.getWord());
-            hangmanPictures.print(MAX_HIT_POINTS);
+            hangmanPictures.print(MAX_HEALTH);
         }
     }
 
