@@ -7,7 +7,7 @@ public class Game {
     private static final String WRONG_INPUT_LETTER = "Wrong input. Enter a letter";
 
     private final PuzzleWord puzzleWord;
-    private final UserLettersInput userLettersInput;
+    private final WrongLetters wrongLetters;
     private final HangmanPictures hangmanPictures;
     private final HangedMan hangedMan;
 
@@ -15,7 +15,7 @@ public class Game {
         puzzleWord = new PuzzleWord(selectedWord);
         hangedMan = new HangedMan(gameDifficulty.getInitialHealth());
         hangmanPictures = new HangmanPictures();
-        userLettersInput = new UserLettersInput();
+        wrongLetters = new WrongLetters();
         // TODO remove log
         System.out.println("Log: The guessed word is " + puzzleWord.getWord());
         for (int i = 0; i < gameDifficulty.getNumberOfOpenLetters(); i++) {
@@ -28,23 +28,25 @@ public class Game {
             hangmanPictures.print(MAX_HEALTH - hangedMan.getHealth());
             System.out.printf("You can make %d more mistake(s)%n", hangedMan.getHealth());
             String title = "Word to guess is: " + puzzleWord.getMaskedWord()
-                    + "\nEntered letters: " + userLettersInput.getLetters()
+                    + "\nWrong letters: " + wrongLetters.getLetters()
                     + "\nEnter your guess: ";
             EnglishLetterDialog dialog = new EnglishLetterDialog(title, WRONG_INPUT_LETTER);
             char letter = dialog.input();
-            while (userLettersInput.hasLetter(letter)) {
+            while (isLetterGuessed(letter)) {
                 System.out.println("You have already entered this letter.");
                 letter = dialog.input();
             }
-            userLettersInput.addLetter(letter);
+
             if (puzzleWord.hasLetter(letter)) {
                 puzzleWord.openLetter(letter);
             } else {
+                wrongLetters.addLetter(letter);
                 hangedMan.decreaseHealth();
             }
         }
         printGameResult();
     }
+
 
     private void printGameResult() {
         if (isWin()) {
@@ -54,6 +56,10 @@ public class Game {
             System.out.println("The guessed word was " + puzzleWord.getWord());
             hangmanPictures.print(MAX_HEALTH);
         }
+    }
+
+    private boolean isLetterGuessed(char letter) {
+        return wrongLetters.hasLetter(letter) && puzzleWord.hasLetter(letter);
     }
 
     private boolean isRunning() {

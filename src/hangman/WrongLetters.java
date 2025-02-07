@@ -3,7 +3,7 @@ package hangman;
 import java.util.HashSet;
 import java.util.Set;
 
-public class UserLettersInput {
+public class WrongLetters {
     private final Set<Character> letters = new HashSet<>();
 
     public boolean hasLetter(char letter) {
