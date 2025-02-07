@@ -1,8 +1,11 @@
-package hangman;
+package hangman.game;
 
+import hangman.assets.HangmanPictures;
 import hangman.dialog.EnglishLetterDialog;
-import hangman.puzzleword.PuzzleWord;
-import hangman.puzzleword.ScrambledPuzzleWord;
+import hangman.models.HangedMan;
+import hangman.models.WrongLetters;
+import hangman.models.puzzleword.PuzzleWord;
+import hangman.models.puzzleword.ScrambledPuzzleWord;
 
 public class Game {
     private static final int MAX_HEALTH = 6;

@@ -1,5 +1,9 @@
 package hangman;
 
+import hangman.game.GameDifficulty;
+import hangman.game.HangmanGame;
+import hangman.utility.TextFileReader;
+
 import java.util.List;
 
 public class Main {

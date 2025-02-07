@@ -1,4 +1,4 @@
-package hangman;
+package hangman.models;
 
 public class HangedMan {
     private int health;

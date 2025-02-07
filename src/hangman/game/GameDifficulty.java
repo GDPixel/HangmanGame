@@ -1,4 +1,4 @@
-package hangman;
+package hangman.game;
 
 public enum GameDifficulty {
     EASY(6, 2),

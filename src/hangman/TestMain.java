@@ -1,5 +1,8 @@
 package hangman;
 
+import hangman.game.GameDifficulty;
+import hangman.game.HangmanGame;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +12,7 @@ public class TestMain {
         words.add("chair");
         words.add("glasses");
 
-        HangmanGame game = new HangmanGame(words,GameDifficulty.EASY);
+        HangmanGame game = new HangmanGame(words, GameDifficulty.EASY);
         game.start();
     }
 }

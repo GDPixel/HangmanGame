@@ -1,4 +1,4 @@
-package hangman.puzzleword;
+package hangman.models.puzzleword;
 
 import java.util.ArrayList;
 import java.util.Collections;

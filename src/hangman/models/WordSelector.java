@@ -1,4 +1,4 @@
-package hangman;
+package hangman.models;
 
 import java.util.List;
 import java.util.Random;

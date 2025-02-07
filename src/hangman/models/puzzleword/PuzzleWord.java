@@ -1,4 +1,4 @@
-package hangman.puzzleword;
+package hangman.models.puzzleword;
 
 import java.util.Random;
 

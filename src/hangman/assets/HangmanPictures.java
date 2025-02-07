@@ -1,4 +1,4 @@
-package hangman;
+package hangman.assets;
 
 public class HangmanPictures {
     private final String[] pictures = {
