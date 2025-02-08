@@ -8,6 +8,9 @@ public class WordSelector {
     private final Random rand = new Random();
 
     public WordSelector(List<String> words) {
+        if (words.isEmpty()) {
+            throw new IllegalArgumentException("words in WordSelector cannot be empty");
+        }
         this.words = words;
     }
 

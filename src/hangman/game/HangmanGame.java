@@ -23,9 +23,9 @@ public class HangmanGame {
     private final WordSelector wordSelector;
     private final GameDifficulty gameDifficulty;
 
-    public HangmanGame(List<String> words, GameDifficulty gameDifficulty) {
+    public HangmanGame(List<String> words, GameDifficulty defaultGameDifficulty) {
         wordSelector = new WordSelector(words);
-        this.gameDifficulty = gameDifficulty;
+        this.gameDifficulty = defaultGameDifficulty;
     }
 
     public void start() {
