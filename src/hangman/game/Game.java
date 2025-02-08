@@ -1,5 +1,6 @@
 package hangman.game;
 
+import hangman.assets.messages.GameMessages;
 import hangman.assets.HangmanPictures;
 import hangman.dialog.EnglishLetterDialog;
 import hangman.models.HangedMan;
@@ -9,7 +10,6 @@ import hangman.models.puzzleword.ScrambledPuzzleWord;
 
 public class Game {
     private static final int MAX_HEALTH = 6;
-    private static final String WRONG_INPUT_LETTER = "Wrong input. Enter a letter";
 
     private final PuzzleWord puzzleWord;
     private final WrongLetters wrongLetters;
@@ -35,14 +35,14 @@ public class Game {
     public void run() {
         while (isRunning()) {
             hangmanPictures.print(MAX_HEALTH - hangedMan.getHealth());
-            System.out.printf("You can make %d more mistake(s)%n", hangedMan.getHealth());
-            String title = "Word to guess is: " + puzzleWord.getMaskedWord()
-                    + "\nWrong letters: " + wrongLetters.getLetters()
-                    + "\nEnter your guess: ";
-            EnglishLetterDialog dialog = new EnglishLetterDialog(title, WRONG_INPUT_LETTER);
+            System.out.printf(GameMessages.YOU_CAN_MAKE_MORE_MISTAKES, hangedMan.getHealth());
+            String statusTitle = GameMessages.WORD_TO_GUESS + puzzleWord.getMaskedWord()
+                    + "\n" + GameMessages.WRONG_LETTERS + wrongLetters.getLetters()
+                    + "\n" + GameMessages.ENTER_YOUR_GUESS;
+            EnglishLetterDialog dialog = new EnglishLetterDialog(statusTitle, GameMessages.WRONG_INPUT_LETTER);
             char letter = dialog.input();
             while (isLetterGuessed(letter)) {
-                System.out.println("You have already entered this letter.");
+                System.out.println(GameMessages.ALREADY_GUESSED_LETTER);
                 letter = dialog.input();
             }
 
@@ -58,11 +58,11 @@ public class Game {
 
 
     private void printGameResult() {
+        System.out.println(GameMessages.GUESSED_WORD_WAS + puzzleWord.getWord());
         if (isWin()) {
-            System.out.println("Congratulation! You won!");
+            System.out.println(GameMessages.CONGRATULATION_WIN);
         } else if (isLose()) {
-            System.out.println("You lost!");
-            System.out.println("The guessed word was " + puzzleWord.getWord());
+            System.out.println(GameMessages.YOU_LOST);
             hangmanPictures.print(MAX_HEALTH);
         }
     }
