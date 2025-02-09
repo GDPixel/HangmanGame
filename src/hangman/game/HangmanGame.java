@@ -1,13 +1,12 @@
 package hangman.game;
 
+import hangman.Menu;
 import hangman.assets.messages.MenuMessages;
-import hangman.dialog.IntegerSelectDialog;
 import hangman.models.WordSelector;
 import hangman.models.puzzleword.PuzzleWord;
 import hangman.models.puzzleword.ScrambledPuzzleWord;
 
 import java.util.List;
-import java.util.Set;
 
 public class HangmanGame {
 
@@ -16,12 +15,14 @@ public class HangmanGame {
         SCRAMBLED
     }
 
+    private Menu mainMenu;
     private final WordSelector wordSelector;
-    private final GameDifficulty gameDifficulty;
+    private GameDifficulty gameDifficulty;
 
     public HangmanGame(List<String> words, GameDifficulty defaultGameDifficulty) {
         wordSelector = new WordSelector(words);
         this.gameDifficulty = defaultGameDifficulty;
+        createMainMenu();
     }
 
     public void start() {
@@ -37,7 +38,7 @@ public class HangmanGame {
             puzzleWord = new PuzzleWord(selectedWord);
         }
         Game game = new Game(puzzleWord, gameDifficulty);
-        game.run();
+        game.play();
         showMainMenu();
     }
 
@@ -49,25 +50,31 @@ public class HangmanGame {
         startNewGame(GameType.SCRAMBLED);
     }
 
-    private void showMainMenu() {
-        System.out.println(MenuMessages.WELCOME_SCREEN);
-        System.out.println(MenuMessages.GAME_DIFFICULTY + gameDifficulty);
-        String mainMenuTitle = MenuMessages.MAIN_MENU_ITEMS + MenuMessages.ENTER_YOUR_CHOICE;
-        IntegerSelectDialog dialog = new IntegerSelectDialog(mainMenuTitle, MenuMessages.WRONG_INPUT,
-                Set.of(MenuMessages.NEW_REGULAR_GAME, MenuMessages.NEW_SCRAMBLE_GAME, MenuMessages.EXIT));
-        int choice = dialog.input();
-        selectMenu(choice);
+    private void createMainMenu() {
+        mainMenu = new Menu(MenuMessages.MAIN_MENU, MenuMessages.ENTER_YOUR_CHOICE, MenuMessages.WRONG_INPUT);
+
+        Menu difficultySubMenu = new Menu(MenuMessages.CHANGE_DIFFICULTY, MenuMessages.ENTER_YOUR_CHOICE, MenuMessages.WRONG_INPUT);
+        difficultySubMenu.add(GameDifficulty.EASY.name(), () -> changeDifficulty(GameDifficulty.EASY));
+        difficultySubMenu.add(GameDifficulty.MEDIUM.name(), () -> changeDifficulty(GameDifficulty.MEDIUM));
+        difficultySubMenu.add(GameDifficulty.HARD.name(), () -> changeDifficulty(GameDifficulty.HARD));
+
+        mainMenu.add(MenuMessages.START_REGULAR_GAME, this::newRegularGame);
+        mainMenu.add(MenuMessages.START_SCRAMBLE_GAME, this::newScrambleGame);
+        mainMenu.addSubMenu(MenuMessages.CHANGE_DIFFICULTY, difficultySubMenu);
+        mainMenu.add(MenuMessages.EXIT, this::exit);
     }
 
-    private void selectMenu(int choice) {
-        if (choice == MenuMessages.NEW_REGULAR_GAME) {
-            newRegularGame();
-        }
-        if (choice == MenuMessages.NEW_SCRAMBLE_GAME) {
-            newScrambleGame();
-        }
-        if (choice == MenuMessages.EXIT) {
-            System.out.println(MenuMessages.EXITING_GAME);
-        }
+    private void showMainMenu() {
+        System.out.println(MenuMessages.WELCOME_SCREEN);
+        mainMenu.show();
+        mainMenu.select();
+    }
+
+    private void changeDifficulty(GameDifficulty gameDifficulty) {
+        this.gameDifficulty = gameDifficulty;
+    }
+
+    private void exit() {
+        System.out.println(MenuMessages.EXITING_GAME);
     }
 }

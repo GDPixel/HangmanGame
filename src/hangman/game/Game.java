@@ -32,7 +32,7 @@ public class Game {
         }
     }
 
-    public void run() {
+    public void play() {
         while (isRunning()) {
             showGameStage();
             char letter = getUserGuess();
