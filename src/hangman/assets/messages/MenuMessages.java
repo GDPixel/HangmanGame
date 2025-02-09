@@ -26,6 +26,8 @@ public final class MenuMessages {
     public static final String WRONG_INPUT = "Wrong input.";
 
     public static final String EXITING_GAME = "Exiting game...";
+
+    private MenuMessages() {}
 }
 
 

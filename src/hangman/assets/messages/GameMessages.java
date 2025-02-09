@@ -10,4 +10,6 @@ public final class GameMessages {
     public static final String CONGRATULATION_WIN = "Congratulation! You won!";
     public static final String YOU_LOST = "You lost!";
     public static final String GUESSED_WORD_WAS = "The guessed word was ";
+
+    private GameMessages() {}
 }
