@@ -34,28 +34,44 @@ public class Game {
 
     public void run() {
         while (isRunning()) {
-            hangmanPictures.print(MAX_HEALTH - hangedMan.getHealth());
-            System.out.printf(GameMessages.YOU_CAN_MAKE_MORE_MISTAKES, hangedMan.getHealth());
-            String statusTitle = GameMessages.WORD_TO_GUESS + puzzleWord.getMaskedWord()
-                    + "\n" + GameMessages.WRONG_LETTERS + wrongLetters.getLetters()
-                    + "\n" + GameMessages.ENTER_YOUR_GUESS;
-            EnglishLetterDialog dialog = new EnglishLetterDialog(statusTitle, GameMessages.WRONG_INPUT_LETTER);
-            char letter = dialog.input();
-            while (isLetterGuessed(letter)) {
-                System.out.println(GameMessages.ALREADY_GUESSED_LETTER);
-                letter = dialog.input();
-            }
-
-            if (puzzleWord.hasLetter(letter)) {
-                puzzleWord.openLetter(letter);
-            } else {
-                wrongLetters.addLetter(letter);
-                hangedMan.decreaseHealth();
-            }
+            showGameStage();
+            char letter = getUserGuess();
+            processUserGuess(letter);
         }
         printGameResult();
     }
 
+    private void showGameStage() {
+        hangmanPictures.print(MAX_HEALTH - hangedMan.getHealth());
+        System.out.printf(GameMessages.YOU_CAN_MAKE_MORE_MISTAKES, hangedMan.getHealth());
+    }
+
+    private char getUserGuess() {
+        String statusTitle = GameMessages.WORD_TO_GUESS + puzzleWord.getMaskedWord()
+                + "\n" + GameMessages.WRONG_LETTERS + wrongLetters.getLetters()
+                + "\n" + GameMessages.ENTER_YOUR_GUESS;
+        EnglishLetterDialog dialog = new EnglishLetterDialog(statusTitle, GameMessages.WRONG_INPUT_LETTER);
+        char letter = dialog.input();
+        while (isLetterGuessed(letter)) {
+            System.out.println(GameMessages.ALREADY_GUESSED_LETTER);
+            letter = dialog.input();
+        }
+
+        return letter;
+    }
+
+    private boolean isLetterGuessed(char letter) {
+        return wrongLetters.hasLetter(letter) || puzzleWord.hasMaskedWordLetter(letter);
+    }
+
+    private void processUserGuess(char letter) {
+        if (puzzleWord.hasLetter(letter)) {
+            puzzleWord.openLetter(letter);
+        } else {
+            wrongLetters.addLetter(letter);
+            hangedMan.decreaseHealth();
+        }
+    }
 
     private void printGameResult() {
         System.out.println(GameMessages.GUESSED_WORD_WAS + puzzleWord.getWord());
@@ -65,10 +81,6 @@ public class Game {
             System.out.println(GameMessages.YOU_LOST);
             hangmanPictures.print(MAX_HEALTH);
         }
-    }
-
-    private boolean isLetterGuessed(char letter) {
-        return wrongLetters.hasLetter(letter) || puzzleWord.hasMaskedWordLetter(letter);
     }
 
     private boolean isRunning() {
@@ -82,5 +94,4 @@ public class Game {
     private boolean isLose() {
         return !hangedMan.isAlive();
     }
-
 }

@@ -7,7 +7,6 @@ public class PuzzleWord {
     protected final String word;
     protected final StringBuilder maskedWord;
 
-
     public PuzzleWord(String word) {
         if (word == null) {
             throw new IllegalArgumentException("PuzzleWord constructor argument can't be null");
@@ -46,19 +45,6 @@ public class PuzzleWord {
 
     public void openRandomLetter() {
         openRandomLetterInWord(word);
-//        if (isSolved()) {
-//            return;
-//        }
-//
-//        Random random = new Random();
-//        int position = random.nextInt(maskedWord.length());
-//        char letter = maskedWord.charAt(position);
-//        while (letter != MASK.charAt(0)) {
-//            position = random.nextInt(maskedWord.length());
-//            letter = maskedWord.charAt(position);
-//        }
-//
-//        openLetter(word.charAt(position));
     }
 
     protected void openRandomLetterInWord(String word) {

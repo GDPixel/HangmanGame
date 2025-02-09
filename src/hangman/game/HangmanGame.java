@@ -25,7 +25,7 @@ public class HangmanGame {
     }
 
     public void start() {
-        mainMenu();
+        showMainMenu();
     }
 
     private void startNewGame(GameType gameType) {
@@ -38,7 +38,7 @@ public class HangmanGame {
         }
         Game game = new Game(puzzleWord, gameDifficulty);
         game.run();
-        mainMenu();
+        showMainMenu();
     }
 
     private void newRegularGame() {
@@ -49,12 +49,10 @@ public class HangmanGame {
         startNewGame(GameType.SCRAMBLED);
     }
 
-    private void mainMenu() {
-        System.out.println(MenuMessages.BORDER);
-        System.out.println(MenuMessages.WELCOME);
-        System.out.println(MenuMessages.BORDER);
+    private void showMainMenu() {
+        System.out.println(MenuMessages.WELCOME_SCREEN);
         System.out.println(MenuMessages.GAME_DIFFICULTY + gameDifficulty);
-        String mainMenuTitle = MenuMessages.START_REGULAR_GAME + MenuMessages.START_SCRAMBLE_GAME + MenuMessages.EXIT_GAME + MenuMessages.ENTER_YOUR_CHOICE;
+        String mainMenuTitle = MenuMessages.MAIN_MENU_ITEMS + MenuMessages.ENTER_YOUR_CHOICE;
         IntegerSelectDialog dialog = new IntegerSelectDialog(mainMenuTitle, MenuMessages.WRONG_INPUT,
                 Set.of(MenuMessages.NEW_REGULAR_GAME, MenuMessages.NEW_SCRAMBLE_GAME, MenuMessages.EXIT));
         int choice = dialog.input();
