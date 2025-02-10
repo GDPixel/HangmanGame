@@ -2,11 +2,10 @@ package hangman.game;
 
 import hangman.assets.messages.GameMessages;
 import hangman.assets.HangmanPictures;
-import hangman.dialog.EnglishLetterDialog;
+import hangman.input.dialog.EnglishLetterDialog;
 import hangman.models.HangedMan;
 import hangman.models.WrongLetters;
 import hangman.models.puzzleword.PuzzleWord;
-import hangman.models.puzzleword.ScrambledPuzzleWord;
 
 public class Game {
     private static final int MAX_HEALTH = 6;
@@ -21,11 +20,6 @@ public class Game {
         hangedMan = new HangedMan(gameDifficulty.getInitialHealth());
         hangmanPictures = new HangmanPictures();
         wrongLetters = new WrongLetters();
-        // TODO remove log
-        System.out.println("Log: The guessed word is " + puzzleWord.getWord());
-        if (puzzleWord instanceof ScrambledPuzzleWord scrambledPuzzleWord) {
-            System.out.println(scrambledPuzzleWord.getScrambledWord());
-        }
 
         for (int i = 0; i < gameDifficulty.getNumberOfOpenLetters(); i++) {
             puzzleWord.openRandomLetter();

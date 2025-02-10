@@ -1,6 +1,6 @@
 package hangman.game;
 
-import hangman.Menu;
+import hangman.input.Menu;
 import hangman.assets.messages.MenuMessages;
 import hangman.models.WordSelector;
 import hangman.models.puzzleword.PuzzleWord;
@@ -26,6 +26,7 @@ public class HangmanGame {
     }
 
     public void start() {
+        showWelcomeScreen();
         showMainMenu();
     }
 
@@ -38,6 +39,7 @@ public class HangmanGame {
             puzzleWord = new PuzzleWord(selectedWord);
         }
         Game game = new Game(puzzleWord, gameDifficulty);
+        System.out.printf(MenuMessages.STARTING_WHICH_GAME, gameDifficulty.name(),gameType.name());
         game.play();
         showMainMenu();
     }
@@ -49,6 +51,7 @@ public class HangmanGame {
     private void newScrambleGame() {
         startNewGame(GameType.SCRAMBLED);
     }
+
 
     private void createMainMenu() {
         mainMenu = new Menu(MenuMessages.MAIN_MENU, MenuMessages.ENTER_YOUR_CHOICE, MenuMessages.WRONG_INPUT);
@@ -64,8 +67,12 @@ public class HangmanGame {
         mainMenu.add(MenuMessages.EXIT, this::exit);
     }
 
-    private void showMainMenu() {
+    private void showWelcomeScreen() {
         System.out.println(MenuMessages.WELCOME_SCREEN);
+    }
+
+    private void showMainMenu() {
+
         mainMenu.show();
         mainMenu.select();
     }

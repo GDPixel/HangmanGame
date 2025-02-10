@@ -1,4 +1,4 @@
-package hangman.dialog;
+package hangman.input.dialog;
 
 import java.util.Scanner;
 

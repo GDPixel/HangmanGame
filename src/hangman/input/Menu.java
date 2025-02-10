@@ -1,4 +1,4 @@
-package hangman;
+package hangman.input;
 
 import hangman.assets.messages.MenuMessages;
 
@@ -10,7 +10,7 @@ public class Menu {
     private static final int FIRST_ID = 1;
 
     private final Scanner scanner = new Scanner(System.in);
-    private String title;
+    private final String title;
     private final String description;
     private final String error;
     private final List<Item> items;
