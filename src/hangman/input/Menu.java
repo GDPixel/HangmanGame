@@ -42,7 +42,7 @@ public class Menu {
         System.out.println(title);
         System.out.println(MenuMessages.THIN_BORDER);
         for (Item item : items) {
-            System.out.printf("%s (%d)%n", item.text, item.id);
+            System.out.printf("%d - %s%n", item.id, item.text);
         }
         System.out.println(MenuMessages.THIN_BORDER);
     }
