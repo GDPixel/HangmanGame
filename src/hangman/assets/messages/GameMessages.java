@@ -11,5 +11,7 @@ public final class GameMessages {
     public static final String YOU_LOST = "You lost!";
     public static final String GUESSED_WORD_WAS = "The guessed word was ";
 
+    public static final String THIN_BORDER = MenuMessages.THIN_BORDER;
+
     private GameMessages() {}
 }

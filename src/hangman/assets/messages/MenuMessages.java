@@ -35,9 +35,10 @@ public final class MenuMessages {
 
     public static final String REGULAR_GAME_DESCRIPTION = "Enter letters to uncover the hidden word!";
     public static final String SCRAMBLED_GAME_DESCRIPTION = REGULAR_GAME_DESCRIPTION + """
-            \nThe letters in the word are scrambled,
-            except for the first one. Good luck!
-            """;
+                        \nThe letters in the word are scrambled,
+                        except for the first one.
+                        You need to mentally unscramble it.
+                        Good luck!""";
 
     private MenuMessages() {
     }

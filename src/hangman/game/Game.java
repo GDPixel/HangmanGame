@@ -68,13 +68,14 @@ public class Game {
     }
 
     private void printGameResult() {
-        System.out.println(GameMessages.GUESSED_WORD_WAS + puzzleWord.getWord());
         if (isWin()) {
             System.out.println(GameMessages.CONGRATULATION_WIN);
         } else if (isLose()) {
-            System.out.println(GameMessages.YOU_LOST);
             hangmanPictures.print(MAX_HEALTH);
+            System.out.println(GameMessages.YOU_LOST);
         }
+        System.out.println(GameMessages.GUESSED_WORD_WAS + puzzleWord.getWord());
+        System.out.println(GameMessages.THIN_BORDER);
     }
 
     private boolean isRunning() {

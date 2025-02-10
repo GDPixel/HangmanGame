@@ -2,23 +2,13 @@ package hangman;
 
 import hangman.game.GameDifficulty;
 import hangman.game.HangmanGame;
-import hangman.utility.TextFileReader;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        final String fileName = "resources/words.txt";
-        List<String> words;
-        try {
-            var reader = new TextFileReader(fileName);
-            words = reader.readWords();
-        } catch (RuntimeException e) {
-            words = getAnimals();
-        }
-
-        var game = new HangmanGame(words, GameDifficulty.MEDIUM);
+        var game = new HangmanGame(GameDifficulty.MEDIUM);
         game.start();
     }
 

@@ -5,10 +5,15 @@ import hangman.assets.messages.MenuMessages;
 import hangman.models.WordSelector;
 import hangman.models.puzzleword.PuzzleWord;
 import hangman.models.puzzleword.ScrambledPuzzleWord;
+import hangman.utility.TextFileReader;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class HangmanGame {
+
+    public static final String WORDS_FILE = "resources/words.txt";
 
     private enum GameType {
         REGULAR,
@@ -16,11 +21,15 @@ public class HangmanGame {
     }
 
     private Menu mainMenu;
-    private final WordSelector wordSelector;
     private GameDifficulty gameDifficulty;
+    private List<String> words;
 
-    public HangmanGame(List<String> words, GameDifficulty defaultGameDifficulty) {
-        wordSelector = new WordSelector(words);
+    public HangmanGame(GameDifficulty defaultGameDifficulty) {
+        this(Collections.emptyList(), defaultGameDifficulty);
+    }
+
+    public HangmanGame(List<String> customWords, GameDifficulty defaultGameDifficulty) {
+        this.words = customWords;
         this.gameDifficulty = defaultGameDifficulty;
         createMainMenu();
     }
@@ -30,26 +39,13 @@ public class HangmanGame {
         showMainMenu();
     }
 
-    private void startNewGame(GameType gameType) {
-        String selectedWord = wordSelector.selectRandomWord();
-        PuzzleWord puzzleWord;
-        if (gameType == GameType.SCRAMBLED) {
-            puzzleWord = new ScrambledPuzzleWord(selectedWord);
-        } else {
-            puzzleWord = new PuzzleWord(selectedWord);
-        }
-        Game game = new Game(puzzleWord, gameDifficulty);
-        showGameDescription(gameType);
-        game.play();
-        showMainMenu();
+    private void showWelcomeScreen() {
+        System.out.println(MenuMessages.WELCOME_SCREEN);
     }
 
-    private void newRegularGame() {
-        startNewGame(GameType.REGULAR);
-    }
-
-    private void newScrambleGame() {
-        startNewGame(GameType.SCRAMBLED);
+    private void showMainMenu() {
+        mainMenu.show();
+        mainMenu.select();
     }
 
     private void createMainMenu() {
@@ -67,23 +63,52 @@ public class HangmanGame {
         mainMenu.add(MenuMessages.EXIT, this::exit);
     }
 
-    private void showWelcomeScreen() {
-        System.out.println(MenuMessages.WELCOME_SCREEN);
+    private void newRegularGame() {
+        startNewGame(GameType.REGULAR);
+    }
+
+    private void newScrambleGame() {
+        startNewGame(GameType.SCRAMBLED);
+    }
+
+    private void startNewGame(GameType gameType) {
+        loadWords();
+        WordSelector wordSelector = new WordSelector(words);
+        String randomWord = wordSelector.selectRandomWord();
+        PuzzleWord puzzleWord;
+        switch (gameType) {
+            case SCRAMBLED -> puzzleWord = new ScrambledPuzzleWord(randomWord);
+            case REGULAR -> puzzleWord = new PuzzleWord(randomWord);
+            default -> throw new IllegalArgumentException("Wrong gameType");
+        }
+        Game game = new Game(puzzleWord, gameDifficulty);
+        showGameDescription(gameType);
+        game.play();
+        showMainMenu();
+    }
+
+    private void loadWords() {
+        if (words.isEmpty()) {
+            try {
+                var reader = new TextFileReader(WORDS_FILE);
+                words = reader.readWords();
+            } catch (RuntimeException e) {
+                words = new ArrayList<>();
+                //TODO: add some more words
+                words.add("elephant");
+            }
+        }
     }
 
     private void showGameDescription(GameType gameType) {
-        System.out.printf(MenuMessages.STARTING_WHICH_GAME, gameDifficulty.name(),gameType.name());
+        System.out.printf(MenuMessages.STARTING_WHICH_GAME, gameDifficulty.name(), gameType.name());
+        System.out.println(MenuMessages.THIN_BORDER);
         switch (gameType) {
             case SCRAMBLED -> System.out.println(MenuMessages.SCRAMBLED_GAME_DESCRIPTION);
             case REGULAR -> System.out.println(MenuMessages.REGULAR_GAME_DESCRIPTION);
             default -> throw new RuntimeException("Wrong gameType");
         }
-    }
-
-    private void showMainMenu() {
-
-        mainMenu.show();
-        mainMenu.select();
+        System.out.println(MenuMessages.THIN_BORDER);
     }
 
     private void changeDifficulty(GameDifficulty gameDifficulty) {
