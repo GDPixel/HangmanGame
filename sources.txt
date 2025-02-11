@@ -1,0 +1,17 @@
+./src/hangman/assets/messages/GameMessages.java
+./src/hangman/assets/messages/MenuMessages.java
+./src/hangman/assets/HangmanPictures.java
+./src/hangman/input/dialog/Dialog.java
+./src/hangman/input/dialog/EnglishLetterDialog.java
+./src/hangman/input/Menu.java
+./src/hangman/CustomWordsTestMain.java
+./src/hangman/game/Game.java
+./src/hangman/game/GameDifficulty.java
+./src/hangman/game/HangmanGame.java
+./src/hangman/utility/TextFileReader.java
+./src/hangman/Main.java
+./src/hangman/models/puzzleword/ScrambledPuzzleWord.java
+./src/hangman/models/puzzleword/PuzzleWord.java
+./src/hangman/models/WordSelector.java
+./src/hangman/models/WrongLetters.java
+./src/hangman/models/HangedMan.java

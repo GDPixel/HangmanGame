@@ -17,25 +17,30 @@
 1. Клонируйте репозиторий:
 
    ```bash
-   git clone https://github.com/your_username/your_repository.git
+   git clone https://github.com/GDPixel/HangmanGame
    ```
 
 2. Перейдите в директорию проекта:
 
    ```bash
-   cd your_repository
+   cd HangmanGame/
    ```
 
 3. Скомпилируйте проект:
 
    ```bash
-   javac *.java
+   javac -d ./out @sources.txt
    ```
+5. copy resources to ./out
+```bash
+    cp -r resources/ out/
+```
 
-4. Запустите игру:
+6. Запустите игру:
 
    ```bash
-   java Main
+   cd out/
+   java hangman.Main
    ```
 
 ## Использование
