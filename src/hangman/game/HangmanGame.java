@@ -50,11 +50,16 @@ public class HangmanGame {
     private void createMainMenu() {
         mainMenu = new Menu(MenuMessages.MAIN_MENU, MenuMessages.ENTER_YOUR_CHOICE, MenuMessages.WRONG_INPUT);
 
-        Menu difficultySubMenu = new Menu(MenuMessages.CHANGE_DIFFICULTY, MenuMessages.ENTER_YOUR_CHOICE, MenuMessages.WRONG_INPUT);
+        Menu difficultySubMenu = new Menu(
+                MenuMessages.CHANGE_DIFFICULTY,
+                MenuMessages.ENTER_YOUR_CHOICE,
+                MenuMessages.WRONG_INPUT
+        );
 
         difficultySubMenu.add(MenuMessages.EASY_DIFFICULTY_DESCRIPTION, () -> changeDifficulty(GameDifficulty.EASY));
         difficultySubMenu.add(MenuMessages.MEDIUM_DIFFICULTY_DESCRIPTION, () -> changeDifficulty(GameDifficulty.MEDIUM));
         difficultySubMenu.add(MenuMessages.HARD_DIFFICULTY_DESCRIPTION, () -> changeDifficulty(GameDifficulty.HARD));
+        difficultySubMenu.add(MenuMessages.INSANE_DIFFICULTY_DESCRIPTION, () -> changeDifficulty(GameDifficulty.INSANE));
 
         mainMenu.add(MenuMessages.START_REGULAR_GAME, this::newRegularGame);
         mainMenu.add(MenuMessages.START_SCRAMBLED_GAME, this::newScrambleGame);

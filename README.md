@@ -1,5 +1,7 @@
 # Виселица
 
+<img width = "50%" src="hangman.gif">
+
 Консольная версия игры "Виселица", написанная на Java. Эта игра была разработана с целью изучения объектно-ориентированного программирования (ООП). В этой однопользовательской игре игрок должен угадать слово, вводя буквы по одной. За каждую неправильную попытку игрок теряет жизнь. Игра продолжается до тех пор, пока игрок не угадает слово или не потеряет все жизни.
 
 ## Особенности
@@ -12,7 +14,7 @@
 - Удобный интерфейс для ввода букв.
 - Отслеживание оставшихся попыток.
 
-## Установка
+## Установка Linux
 
 1. Клонируйте репозиторий:
 
@@ -31,25 +33,63 @@
    ```bash
    javac -d ./out @sources.txt
    ```
-5. copy resources to ./out
-```bash
+4. Скопируйте resources to ./out
+    ```bash
     cp -r resources/ out/
-```
+    ```
 
-6. Запустите игру:
+5. Запустите игру:
+    ```bash
+    cd out/
+    ```
+   ```bash
+   java hangman.Main
+   ```
+
+## Установка Windows
+
+1. Клонируйте репозиторий:
 
    ```bash
-   cd out/
+   git clone https://github.com/GDPixel/HangmanGame
+   ```
+
+2. Перейдите в директорию проекта:
+
+   ```bash
+   cd HangmanGame
+   ```
+
+3. Скомпилируйте проект:
+
+   ```bash
+   javac -d .\out @sources.txt
+   ```
+4. Скопируйте resources to .\out
+
+    ```bash
+    mkdir -r .\out\resources
+    ```
+    ```bash
+    copy .\resources .\out\resources
+    ```
+
+5. Запустите игру:
+    ```bash
+    cd out
+    ```
+   ```bash
    java hangman.Main
    ```
 
 ## Использование
 
 1. Начните игру, следуя инструкциям в консоли.
-2. Выберите режим игры: Обычный или С перемешанными буквами.
-3. Вводите буквы, чтобы угадать слово.
-4. Следите за количеством оставшихся попыток.
-5. Удачи!
+2. Можете изменить сложность
+3. Выберите режим игры: Обычный или С перемешанными буквами.
+4. Вводите буквы, чтобы угадать слово.
+5. Следите за количеством оставшихся попыток.
+6. Удачи!
 
 # Hangman
 
@@ -65,36 +105,83 @@ A console version of the "Hangman" game written in Java. This game was developed
 - User-friendly interface for letter input.
 - Tracking of remaining attempts.
 
-## Installation
+## Installation Linux
 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your_username/your_repository.git
+   git clone https://github.com/GDPixel/HangmanGame
    ```
 
 2. Navigate to the project directory:
 
    ```bash
-   cd your_repository
+   cd HangmanGame/
    ```
 
 3. Compile the project:
 
    ```bash
-   javac *.java
+   javac -d ./out @sources.txt
    ```
 
-4. Run the game:
+4. Copy resources to ./out:
 
    ```bash
-   java Main
+   cp -r resources/ out/
+   ```
+   
+5. Run the game:
+
+   ```bash
+   cd out/
+   ```
+   ```bash
+   java hangman.Main
+   ```
+## Installation Windows
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/GDPixel/HangmanGame
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd HangmanGame
+   ```
+
+3. Compile the project:
+
+   ```bash
+   javac -d .\out @sources.txt
+   ```
+
+4. Copy resources to ./out:
+
+    ```bash
+    mkdir -r .\out\resources
+    ```
+    ```bash
+    copy .\resources .\out\resources
+    ```
+
+5. Run the game:
+
+   ```bash
+   cd out
+   ```
+   ```bash
+   java hangman.Main
    ```
 
 ## Usage
 
 1. Start the game by following the instructions in the console.
-2. Choose your game mode: Regular or Scrambled.
-3. Enter letters to guess the word.
-4. Keep an eye on the number of remaining attempts.
-5. Good luck!
+2. You can change the difficulty.
+3. Choose your game mode: Regular or Scrambled.
+4. Enter letters to guess the word.
+5. Keep an eye on the number of remaining attempts.
+6. Good luck!

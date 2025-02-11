@@ -2,8 +2,9 @@ package hangman.game;
 
 public enum GameDifficulty {
     EASY(6, 2),
-    MEDIUM(5, 1),
-    HARD(4, 0);
+    MEDIUM(6, 1),
+    HARD(5, 1),
+    INSANE(4,0);
 
     private final int initialHealth;
     private final int numberOfOpenLetters;
