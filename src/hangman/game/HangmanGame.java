@@ -12,8 +12,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class HangmanGame {
-
-    public static final String WORDS_FILE = "resources/words.txt";
+    public static final String RESOURCE_FILE = "resources/words.txt";
 
     private enum GameType {
         REGULAR,
@@ -90,12 +89,22 @@ public class HangmanGame {
     private void loadWords() {
         if (words.isEmpty()) {
             try {
-                var reader = new TextFileReader(WORDS_FILE);
+                var reader = new TextFileReader(RESOURCE_FILE);
                 words = reader.readWords();
             } catch (RuntimeException e) {
                 words = new ArrayList<>();
-                //TODO: add some more words
                 words.add("elephant");
+                words.add("giraffe");
+                words.add("dolphin");
+                words.add("penguin");
+                words.add("kangaroo");
+                words.add("cheetah");
+                words.add("alligator");
+                words.add("octopus");
+                words.add("flamingo");
+                words.add("rhinoceros");
+                words.add("buffalo");
+                words.add("crocodile");
             }
         }
     }

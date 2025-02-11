@@ -3,8 +3,9 @@ package hangman.models.puzzleword;
 import java.util.Random;
 
 public class PuzzleWord {
-    protected static final String MASK = "_";
-    protected final String word;
+    private static final String MASK = "_";
+
+    private final String word;
     protected final StringBuilder maskedWord;
 
     public PuzzleWord(String word) {

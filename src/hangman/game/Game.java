@@ -36,15 +36,17 @@ public class Game {
     }
 
     private void showGameStage() {
-        hangmanPictures.print(MAX_HEALTH - hangedMan.getHealth());
+        int stage = MAX_HEALTH - hangedMan.getHealth();
+        hangmanPictures.print(stage);
         System.out.printf(GameMessages.YOU_CAN_MAKE_MORE_MISTAKES, hangedMan.getHealth());
     }
 
     private char getUserGuess() {
-        String statusTitle = GameMessages.WORD_TO_GUESS + puzzleWord.getMaskedWord()
-                + "\n" + GameMessages.WRONG_LETTERS + wrongLetters.getLetters()
-                + "\n" + GameMessages.ENTER_YOUR_GUESS;
-        EnglishLetterDialog dialog = new EnglishLetterDialog(statusTitle, GameMessages.WRONG_INPUT_LETTER);
+        String currentStatusTitle = GameMessages.CURRENT_STAGE_STATUS
+                .formatted(puzzleWord.getMaskedWord(), wrongLetters.getLetters())
+                + GameMessages.ENTER_YOUR_GUESS;
+
+        EnglishLetterDialog dialog = new EnglishLetterDialog(currentStatusTitle, GameMessages.WRONG_INPUT_LETTER);
         char letter = dialog.input();
         while (isLetterGuessed(letter)) {
             System.out.println(GameMessages.ALREADY_GUESSED_LETTER);

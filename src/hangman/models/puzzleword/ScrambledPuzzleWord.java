@@ -10,7 +10,7 @@ public class ScrambledPuzzleWord extends PuzzleWord {
 
     /**
      *   To make it easier for non-native English speakers,
-     *   scramble word from index: {@value FROM_INDEX_SCRAMBLE}
+     *   scramble word from index: {@value FROM_INDEX_SCRAMBLE} to the end
      */
     public ScrambledPuzzleWord(String word) {
         this(word, FROM_INDEX_SCRAMBLE, word.length());
@@ -34,10 +34,6 @@ public class ScrambledPuzzleWord extends PuzzleWord {
     @Override
     public boolean isSolved() {
         return scrambledWord.equals(getMaskedWord());
-    }
-
-    public String getScrambledWord() {
-        return scrambledWord;
     }
 
     private String scramble(String word, int fromIndex, int toIndex) {

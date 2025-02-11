@@ -17,14 +17,14 @@ public class EnglishLetterDialog implements Dialog<Character> {
         while (true) {
             System.out.print(title);
             String input = scanner.nextLine();
-            if (isEngLetter(input)) {
+            if (isEnglishLetter(input)) {
                 return input.toLowerCase().charAt(0);
             }
             System.out.println(error);
         }
     }
 
-    boolean isEngLetter(String input) {
+    boolean isEnglishLetter(String input) {
         return input.matches("[a-zA-Z]");
     }
 }
