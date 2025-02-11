@@ -4,7 +4,8 @@ import hangman.game.GameDifficulty;
 
 public final class MenuMessages {
     public static final String BORDER = "═════════════════════════════════";
-    public static final String THIN_BORDER = "―――――――――――――――――――";
+    public static final String THIN_BORDER = //"―――――――――――――――――――";
+    "─────────────────────────────────";
     public static final String HANGMAN_TITLE = """
             
                      ┓┏
@@ -15,7 +16,7 @@ public final class MenuMessages {
 
     public static final String WELCOME_SCREEN = BORDER + HANGMAN_TITLE + BORDER;
 
-    public static final String MAIN_MENU = "\t\t\tMain menu";
+    public static final String MAIN_MENU = "             Main menu";
     public static final String STARTING_WHICH_GAME = "Starting %s %s Game%n";
     public static final String START_REGULAR_GAME = "Start Regular game";
     public static final String START_SCRAMBLED_GAME = "Start Scrambled game";
